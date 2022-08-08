@@ -23,72 +23,38 @@
             },1000)
         }
             
+        const assyfn = async (post) => {
+            const createposts=new Promise((resolve,reject)=>{
+                 resolve(posts.push(post))
+            })
+            let creating = await createposts
+             return creating;
+        }
+         
+        assyfn({title:'Post-Three',body:'This is third post'}).then(console.log('Third post is created'))
+        assyfn({title:'Post-Fourth',body:'This is fourth post'}).then(console.log('Here I created one more post'))
+        
+        
         
 
-        
-        
-        function createPosts(post) {
-            return new Promise((resolve,reject)=>{
-                setTimeout(() =>{
-        posts.push(post);
-        const error=false
-        if(!error) {
-            resolve();
-        } else {
-            reject('Error:Something went wrong')
-        }
-        },1000)
-            })
-           
-        }
-
-        createPosts({title:'Post-Three',body:'This is the third post'})
-        .then(()=> {
-            getposts()
-            deleteposts().then(()=>{
-                getposts()
-            })
+      const assyfn2 = async() => {
+        const deleteposts=new Promise((resolve,reject)=>{
+            resolve(posts.pop())
         })
-        .catch(err => console.log(err))
 
+        let deleting = await deleteposts
+      }
+
+      assyfn2()
+      getposts()
         
 
-        function deleteposts() {
-            return new Promise((resolve,reject)=>{
-                setTimeout(()=>{
-                    const error= (posts.length === 0)
-                    if(!error) {
-                        posts.pop();
-                        resolve()
-                    } else {
-                        reject('Error:Array is Empty')
-                    }
-                },1000)
-            })
-        }
        
-      function updateLastActivityTime() {
-        return new Promise((resolve,reject)=>{
-            setTimeout(()=>{
-                posts.lastactivitytime=new Date().getTime();
-                resolve(posts.lastactivitytime)
-            },1000)
-        })
-      }
-        
-      function userUpdatesapost() {
-        Promise.all([createPosts,updateLastActivityTime]).then(([createdpost,lasttime])=>{
-            console.log(createdpost)
-            console.log(lasttime)
-        })
-        .catch(err=>console.log(err))
-      }
-        
-        // userUpdatesapost()
+       
+      
         
   
-      console.log(posts)
-      
+    
         
         
         
